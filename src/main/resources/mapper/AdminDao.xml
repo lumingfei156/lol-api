@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.howieli.lol.dao.AdminDao">
+  <resultMap id="BaseResultMap" type="cn.howieli.lol.model.Admin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.howieli.lol.model.Admin">
+    insert into t_admin (id, username, nickname, 
+      password, salt)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.howieli.lol.model.Admin">
+    update t_admin
+    set username = #{username,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR}
+      <if test="password != null">
+	      ,password = #{password,jdbcType=VARCHAR},
+	      salt = #{salt,jdbcType=VARCHAR}
+      </if>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="login" parameterType="String" resultMap="BaseResultMap">
+    select id, username, nickname, password, salt
+    from t_admin
+    where username = #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

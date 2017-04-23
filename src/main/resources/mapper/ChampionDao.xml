@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.howieli.lol.dao.ChampionDao">
+  <resultMap id="BaseResultMap" type="cn.howieli.lol.model.Champion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ename" jdbcType="VARCHAR" property="ename" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="rmb" jdbcType="INTEGER" property="rmb"/>
+    <result column="gold" jdbcType="INTEGER" property="gold"/>
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="free" jdbcType="BIT" property="free" />
+  </resultMap>
+  
+  <!-- 插入英雄数据 -->
+  <insert id="insert" parameterType="List">
+    insert into t_champion (id, ename, 
+      title, cname, rmb, gold, tags, 
+      free)
+    values 
+    <foreach collection="list" item="champion" index="index" separator=",">
+    (#{champion.id,jdbcType=VARCHAR}, #{champion.ename,jdbcType=VARCHAR}, 
+      #{champion.title,jdbcType=VARCHAR}, #{champion.cname,jdbcType=VARCHAR}, #{champion.rmb,jdbcType=INTEGER},
+      #{champion.gold,jdbcType=INTEGER}, #{champion.tags,jdbcType=VARCHAR},
+      #{champion.free,jdbcType=BIT})
+     </foreach>
+  </insert>
+  
+  <!-- 清空表 -->
+  <delete id="deleteAll">
+  	delete from t_champion
+  </delete>
+  
+  <!-- 更新周免英雄 -->	
+  <update id="updateFreeChampion" parameterType="Champion">
+	update t_champion
+	set free=#{free,jdbcType=BIT}
+	where id=#{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 获取英雄总数 -->
+  <select id="getTotal" resultType="int">
+  	select count(*)
+  	from t_champion
+  </select>
+  
+  <!-- 通过id查询英雄 -->
+  <select id="getChampionById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, ename, title, cname, tags, free
+    from t_champion
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 获取所有英雄 -->
+  <select id="getChampions" resultMap="BaseResultMap">
+    select *
+    from t_champion
+  </select>
+  
+  <!-- 获取周免英雄 -->
+  <select id="getFreeChampions" resultMap="BaseResultMap">
+  	select *
+  	from t_champion
+  	where free=1
+  </select>
+</mapper>

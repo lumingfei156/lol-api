@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.howieli.lol.dao.ItemDao">
+  <resultMap id="BaseResultMap" type="cn.howieli.lol.model.Item">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="from" jdbcType="VARCHAR" property="from" />
+    <result column="into" jdbcType="VARCHAR" property="into" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="base_price" jdbcType="INTEGER" property="basePrice" />
+    <result column="total_price" jdbcType="INTEGER" property="totalPrice" />
+    <result column="sell_price" jdbcType="INTEGER" property="sellPrice" />
+    <result column="plaintext" jdbcType="LONGVARCHAR" property="plaintext" />
+  </resultMap>
+  <insert id="insert" parameterType="List">
+    insert into t_item (id, name, `from`, 
+      `into`, tags, base_price, 
+      total_price, sell_price, plaintext
+      )
+    values 
+    <foreach collection="list" item="item" index="index" separator=",">
+	    (#{item.id,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR}, #{item.from,jdbcType=VARCHAR}, 
+	      #{item.into,jdbcType=VARCHAR}, #{item.tags,jdbcType=VARCHAR}, #{item.basePrice,jdbcType=INTEGER}, 
+	      #{item.totalPrice,jdbcType=INTEGER}, #{item.sellPrice,jdbcType=INTEGER}, #{item.plaintext,jdbcType=LONGVARCHAR}
+	      )
+    </foreach>
+  </insert>
+  
+  <!-- 清空表 -->
+  <delete id="deleteAll">
+  	delete from t_item
+  </delete>
+  
+  <!-- 获取物品总数 -->
+  <select id="getTotal" resultType="int">
+  	select count(*)
+  	from t_item
+  </select>
+  
+  <!-- 获取装备数据 -->
+  <select id="getItems" resultMap="BaseResultMap">
+    select id, name, `from`, `into`, tags, base_price, total_price, sell_price, plaintext
+    from t_item
+  </select>
+    
+  <!-- 通过id获取装备数据 -->
+  <select id="getItemById" resultMap="BaseResultMap">
+    select id, name, `from`, `into`, tags, base_price, total_price, sell_price, plaintext
+    from t_item
+    where id=#{id,jdbcType=INTEGER}
+  </select>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.howieli.lol.dao.AreaDao">
+  <resultMap id="BaseResultMap" type="cn.howieli.lol.model.Area">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="isp" jdbcType="VARCHAR" property="isp" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, isp, name
+    from t_area
+  </select>
+  <select id="selectById" parameterType="int" resultMap="BaseResultMap">
+    select id, isp, name
+    from t_area
+    where id=#{areaId}
+  </select>
+</mapper>

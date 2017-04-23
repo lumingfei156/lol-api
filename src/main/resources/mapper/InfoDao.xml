@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.howieli.lol.dao.InfoDao">
+  <resultMap id="BaseResultMap" type="cn.howieli.lol.model.Info">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="attack" jdbcType="INTEGER" property="attack" />
+    <result column="defense" jdbcType="INTEGER" property="defense" />
+    <result column="difficulty" jdbcType="INTEGER" property="difficulty" />
+    <result column="magic" jdbcType="INTEGER" property="magic" />
+    <result column="champion_id" jdbcType="INTEGER" property="championId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="List">
+    insert into t_info (attack, defense, 
+      difficulty, magic, champion_id
+      )
+    values 
+      <foreach collection="list" item="info" index="index" separator=",">
+    (#{info.attack,jdbcType=INTEGER}, #{info.defense,jdbcType=INTEGER}, 
+      #{info.difficulty,jdbcType=INTEGER}, #{info.magic,jdbcType=INTEGER}, #{info.championId,jdbcType=INTEGER})
+      </foreach>
+  </insert>
+  
+  <!-- 清空表，自增长主键从0开始 -->
+  <delete id="truncateInfo">
+  	truncate table t_info
+  </delete>
+  
+  <update id="updateByPrimaryKey" parameterType="cn.howieli.lol.model.Info">
+    update t_info
+    set attack = #{attack,jdbcType=INTEGER},
+      defense = #{defense,jdbcType=INTEGER},
+      difficulty = #{difficulty,jdbcType=INTEGER},
+      magic = #{magic,jdbcType=INTEGER},
+      champion_id = #{championId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getInfoByChampionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, attack, defense, difficulty, magic, champion_id
+    from t_info
+    where champion_id = #{championId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, attack, defense, difficulty, magic, champion_id
+    from t_info
+  </select>
+</mapper>

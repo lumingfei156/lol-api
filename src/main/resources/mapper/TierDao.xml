@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.howieli.lol.dao.TierDao">
+  <resultMap id="BaseResultMap" type="cn.howieli.lol.model.Tier">
+    <result column="tier" jdbcType="INTEGER" property="tier" />
+    <result column="queue" jdbcType="INTEGER" property="queue" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.howieli.lol.model.Tier">
+    insert into t_tier (tier, queue, title
+      )
+    values (#{tier,jdbcType=INTEGER}, #{queue,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select tier, queue, title
+    from t_tier
+  </select>
+</mapper>

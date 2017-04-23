@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>API 后台管理</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+ 	
+ 	<link rel="shortcut icon" href="../favicon.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="gray-bg top-navigation">
+	<div id="wrapper">
+		<div id="page-wrapper" class="gray-bg">
+			<div class="row border-bottom white-bg">
+				<nav class="navbar navbar-static-top" role="navigation">
+				    <div class="navbar-header">
+				        <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+				            <i class="fa fa-reorder"></i>
+				        </button>
+				        <a href="#" class="navbar-brand">LOL</a>
+				    </div>
+				    <div class="navbar-collapse collapse" id="navbar">
+				        <ul class="nav navbar-top-links navbar-right">
+				        	<li id="nickname">
+				        		欢迎您，超级管理员
+				        	</li>
+				            <li>
+				                <a data-toggle="modal" data-target="#updateAdminModal">
+				                    <i class="fa fa-refresh"></i> 修改信息
+				                </a>
+				            </li>
+				            <li>
+				                <a href="logout">
+				                    <i class="fa fa-sign-out"></i> 退出
+				                </a>
+				            </li>
+				        </ul>
+				    </div>
+				</nav>
+			</div>
+			<div class="wrapper wrapper-content">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="alert alert-success alert-dismissable">
+	                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+	                            出于兴趣，写了这套API，可能不会跟着腾讯一直更新，也可能会有很多不足，还请提出您的意见。
+	                            邮箱：<a class="alert-link" target="_blank" href="https://mail.google.com">chinahowieli@gmail.com</a>。 
+	                            博客：<a class="alert-link" target="_blank" href="https://www.howieli.cn">https://www.howieli.cn</a>
+                       		</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="ibox float-e-margins">
+								<div class="ibox-title">
+			                        <h5>英雄数据总数</h5>
+			                    </div>
+			                    <div class="ibox-content">
+			                        <h1 class="no-margins" id="championTotal">0</h1>
+			                    </div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="ibox float-e-margins">
+								<div class="ibox-title">
+			                        <h5>装备数据总数</h5>
+			                    </div>
+			                    <div class="ibox-content">
+			                        <h1 class="no-margins" id="itemTotal">0</h1>
+			                    </div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="ibox float-e-margins">
+								<div class="ibox-title">
+			                        <h5>召唤师技能数据总数</h5>
+			                    </div>
+			                    <div class="ibox-content">
+			                        <h1 class="no-margins" id="spellTotal">0</h1>
+			                    </div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<p>
+                        		<button type="button" class="btn btn-block btn-outline btn-primary" onclick="openAlert(1)">点击更新英雄数据</button>
+                    		</p>
+						</div>
+						<div class="col-sm-4">
+							<p>
+                        		<button type="button" class="btn btn-block btn-outline btn-success" onclick="openAlert(2)">点击更新装备数据</button>
+                    		</p>
+						</div>
+						<div class="col-sm-4">
+							<p>
+                        		<button type="button" class="btn btn-block btn-outline btn-info" onclick="openAlert(3)">点击更新技能数据</button>
+                    		</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="ibox float-e-margins">
+			                    <div class="ibox-title">
+			                    	<span class="label label-primary pull-right">今</span>
+			                        <h5>API今日调用</h5>
+			                    </div>
+			                    <div class="ibox-content">
+			                        <h1 class="no-margins" id="todayCount">22,285,400</h1>
+			                    </div>
+			                </div>
+                		</div>
+                		<div class="col-sm-6">
+							<div class="ibox float-e-margins">
+			                    <div class="ibox-title">
+			                    	<span class="label label-warning pull-right">总</span>
+			                        <h5>API总调用</h5>
+			                    </div>
+			                    <div class="ibox-content">
+			                        <h1 class="no-margins" id="totalCount">22,285,400</h1>
+			                    </div>
+			                </div>
+                		</div>
+					</div>
+					<div class="row">
+			            <div class="col-sm-12">
+			                <div class="ibox float-e-margins">
+			                    <div class="ibox-title">
+			                        <h5>近7天API调用</h5>
+			                    </div>
+			                    <div class="ibox-content">
+			                        <div id="morris-one-line-chart"></div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+				</div>
+			</div>
+			<div class="footer">
+                <div class="pull-right">
+                    By：<a href="https://www.howieli.cn" target="_blank">HowieLi's Blog</a>
+                </div>
+                <div>
+                    <strong>Copyright</strong> LOL-API &copy; 2017
+                </div>
+            </div>
+		</div>
+	</div>
+    <div class="modal inmodal" id="updateAdminModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">修改管理员账户</h4>
+                    <small class="font-bold">对内不对外，所以没写太细，能用就行，手动滑稽</small>
+                </div>
+				<form id="updateForm">
+	                <div class="modal-body">
+                		<div class="form-group">
+                			<label>登录名</label>
+                			<input type="text" name="username" value="123" placeholder="请输入你的用户名" aria-required="true" class="form-control">
+                		</div>
+                		<div class="form-group">
+                			<label>昵称</label>
+                			<input type="text" name="nickname" placeholder="请输入你的昵称" aria-required="true" class="form-control">
+                		</div>
+                		<div class="form-group">
+                			<label>新密码</label>
+                			<input type="password" name="newPassword" placeholder="请输入你的新密码" aria-required="true" class="form-control">
+                		</div>
+                   		<div class="form-group">
+                			<label>当前密码</label>
+                			<input type="password" name="password" placeholder="请输入你的当前密码" aria-required="true" class="form-control required">
+                		</div>
+                		<div class="form-group">
+               				<font id="error" color="red"></font>
+               			</div>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+	                    <button type="button" class="btn btn-primary submit" onclick="updateAdmin()">提交</button>
+	                </div>
+				</form>
+            </div>
+        </div>
+    </div>
+	<!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	
+	<!-- Morris -->
+    <script src="js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="js/plugins/morris/morris.js"></script>
+    
+    <!-- Sweet alert -->
+    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+    
+    <!-- jQuery Validation plugin javascript-->
+    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="js/plugins/validate/messages_zh.min.js"></script>
+    
+    <!-- jQuery MD5 -->
+	<script src="js/jQuery.md5.js"></script>
+    
+    <!-- 自定义js-->
+    <script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.howieli.lol.dao.SpellDao">
+  <resultMap id="BaseResultMap" type="cn.howieli.lol.model.Spell">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="spell_id" jdbcType="VARCHAR" property="spellId" />
+    <result column="spell_key" jdbcType="VARCHAR" property="spellKey" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="champion_id" jdbcType="INTEGER" property="championId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_spell
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="List">
+    insert into t_spell (spell_id, spell_key, 
+      name, description, image, 
+      champion_id)
+    values 
+    <foreach collection="list" item="spell" index="index" separator=",">
+    (#{spell.spellId,jdbcType=VARCHAR}, #{spell.spellKey,jdbcType=VARCHAR}, 
+      #{spell.name,jdbcType=VARCHAR}, #{spell.description,jdbcType=VARCHAR}, #{spell.image,jdbcType=VARCHAR}, 
+      #{spell.championId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  
+  <!-- 清空表，自增长主键从0开始 -->
+  <delete id="truncateSpell">
+  	truncate table t_spell
+  </delete>
+  
+  <update id="updateByPrimaryKey" parameterType="cn.howieli.lol.model.Spell">
+    update t_spell
+    set spell_id = #{spellId,jdbcType=VARCHAR},
+      spell_key = #{spellKey,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      champion_id = #{championId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getSpellsByChampionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, spell_id, spell_key, name, description, image, champion_id
+    from t_spell
+    where champion_id = #{championId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, spell_id, spell_key, name, description, image, champion_id
+    from t_spell
+  </select>
+</mapper>

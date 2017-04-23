@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.howieli.lol.dao.CountDao">
+  <resultMap id="BaseResultMap" type="cn.howieli.lol.model.Count">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="api_nums" jdbcType="INTEGER" property="apiNums" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+  </resultMap>
+  <insert id="insertToday">
+    insert into t_count (api_nums, date
+      )
+    values (0, DATE_FORMAT(NOW(),'%Y-%m-%d')
+      )
+  </insert>
+  <update id="updateToday">
+    update t_count
+    set api_nums = api_nums + 1
+    where date = DATE_FORMAT(NOW(),'%Y-%m-%d')
+  </update>
+  <select id="selectToday" resultMap="BaseResultMap">
+    select api_nums,date
+    from t_count
+    where date = DATE_FORMAT(NOW(),'%Y-%m-%d')
+  </select>
+  <select id="select7Day" resultMap="BaseResultMap">
+  	select api_nums, date
+  	from t_count
+  	order by id DESC
+  	limit 0,7
+  </select>
+  <select id="getCountTotal" resultType="int">
+    select sum(api_nums)
+    from t_count
+  </select>
+</mapper>

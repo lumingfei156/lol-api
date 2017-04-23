@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.howieli.lol.dao.SkinDao">
+  <resultMap id="BaseResultMap" type="cn.howieli.lol.model.Skin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="skin_id" jdbcType="VARCHAR" property="skinId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="display_URL" jdbcType="VARCHAR" property="displayUrl" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="champion_id" jdbcType="INTEGER" property="championId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_skin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="List">
+    insert into t_skin (skin_id, name, 
+      num, display_URL, source, 
+      champion_id)
+    values 
+    <foreach collection="list"  item="skin" index="index" separator=",">
+    (#{skin.skinId,jdbcType=VARCHAR}, #{skin.name,jdbcType=VARCHAR}, 
+      #{skin.num,jdbcType=INTEGER}, #{skin.displayUrl,jdbcType=VARCHAR}, #{skin.source,jdbcType=VARCHAR}, 
+      #{skin.championId,jdbcType=INTEGER})
+     </foreach>
+  </insert>
+  
+  <!-- 清空表，自增长主键从0开始 -->
+  <delete id="truncateSkin">
+  	truncate table t_skin
+  </delete>
+  
+  <update id="updateByPrimaryKey" parameterType="cn.howieli.lol.model.Skin">
+    update t_skin
+    set skin_id = #{skinId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      display_URL = #{displayUrl,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      champion_id = #{championId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getSkinsByChampionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, skin_id, name, num, display_URL, source, champion_id
+    from t_skin
+    where champion_id = #{championId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, skin_id, name, num, display_URL, source, champion_id
+    from t_skin
+  </select>
+</mapper>

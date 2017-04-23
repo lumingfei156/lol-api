@@ -1,0 +1,41 @@
+server:
+  port: 8080
+  context-path: /lol
+
+logging:
+  level:
+    cn.howieli.lol: TRACE 
+
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+
+#Druid连接池配置
+druid:
+  type: com.alibaba.druid.pool.DruidDataSource
+  url: jdbc:mysql://localhost:3306/lol_api?useUnicode=true&characterEncoding=utf8&useSSL=true&allowMultiQueries=true
+  driver-class-name: com.mysql.jdbc.Driver
+  username: root
+  password: 123456
+  filters: stat,wall,log4j
+  maxActive: 20
+  initialSize: 0
+  maxWait: 60000
+  minIdle: 1
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: select 'x'
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  poolPreparedStatements: true
+  maxPoolPreparedStatementPerConnectionSize: 20
+  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000  
+  maxOpenPreparedStatements: 20
+
+#Mybatis配置
+mybatis:
+  type-aliases-package: cn.howieli.lol.model
+  mapper-locations:
+  - classpath:mapper/*.xml

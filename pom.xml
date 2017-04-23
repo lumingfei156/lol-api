@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>cn.howieli.lol</groupId>
+	<artifactId>lol</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>lol-api</name>
+	<description>LOL Game Data API from TGP.</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.3.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.7</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!--spring-boot-configuration:spring boot 配置处理器; -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<!-- 添加thymeleaf模板引擎依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		
+		<!-- 热部署 -->
+ 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional> <!-- 表示依赖不会传递 -->
+		</dependency>
+		
+		<!-- 添加mysql驱动 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		
+		<!-- 添加druid依赖 -->
+		<dependency>
+    		<groupId>com.alibaba</groupId>
+    		<artifactId>druid</artifactId>
+    		<version>1.0.28</version>
+		</dependency>
+		
+		<!-- 
+			spring boot mybatis依赖
+			使用大于1.0.0版本，因为1.0.0版本不支持拦截器插件
+			当前最新版本为1.2.0版本
+		 -->
+		<dependency>
+    		<groupId>org.mybatis.spring.boot</groupId>
+    		<artifactId>mybatis-spring-boot-starter</artifactId>
+    		<version>1.2.0</version>
+		</dependency>
+		
+		<!-- html非严格模式需要的包 -->
+		<dependency>
+		    <groupId>net.sourceforge.nekohtml</groupId>
+		    <artifactId>nekohtml</artifactId>
+		</dependency>
+		
+		<!-- MD5加密 -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
