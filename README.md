@@ -1,5 +1,3 @@
-# 尴尬的事
-　　腾讯暂时关闭了TGP查找看战绩的功能，何时恢复不知道，现在查战绩那些是用不了了，真的尴尬。刚写完没几天，就GG了。
 # 写在前面
 　　该项目基于`Spring Boot`开发，因为其它原因，`TGP`上的每个接口，我没有写的很细，只是实现了部分比较重要的功能，比如以下的基本功能：获取英雄、技能、皮肤、装备数据等。稍微高级点的就是查询玩家基本信息、战绩以及对局详情的信息。太细的接口我没有实现，因为我要准备找实习了，需要看些java基础的东西准备各种笔试面试了。
   
@@ -20,7 +18,7 @@
     git clone https://github.com/IT-HowieLi/lol-api
     ```
 
-2. `Mysql`数据库执行`/src/main/resources/init.sql`。
+2. `Mysql`数据库执行`/src/main/resources/init.sql`SQL脚本。
 3. 修改`/src/main/resources/application.yml`中的数据库账户密码，修改为本地数据库账户密码。
 4. 进入项目，启动项目。
 
@@ -28,7 +26,7 @@
     mvn spring-boot:run
     ```
 
-5. 启动成功后，访问`http://localhost:8080/lol/admin`，默认账户：admin 密码:123456。
+5. 启动成功后，访问`http://localhost:8080/lol/admin`，默认账户：admin 密码：123456。
 6. 登录成功后，点击三个更新按钮，分别更新英雄数据，装备数据，技能数据。
 
 ---

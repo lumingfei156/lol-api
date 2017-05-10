@@ -11,6 +11,7 @@ public class LolApiApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		
 	}
 
 }
