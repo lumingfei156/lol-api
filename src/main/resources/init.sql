@@ -136,7 +136,7 @@ CREATE TABLE t_summoner_spell (
 	id VARCHAR(255) COMMENT '技能ID',
 	name VARCHAR(255) COMMENT '技能名字',
 	description TEXT COMMENT '技能描述',
-	image VARCHAR(255) COMMENT '技能图片',
+	image VARCHAR(255) COMMENT '技能图片'
 )COMMENT '召唤师技能表';
 
 CREATE TABLE t_count (
