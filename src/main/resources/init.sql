@@ -8,7 +8,7 @@ CREATE TABLE t_admin (
 	password VARCHAR(255) COMMENT '密码',
 	salt VARCHAR(50) COMMENT '盐值'
 )COMMENT '后台管理员表';
-INSERT INTO t_admin VALUES('1', 'HowieLi', '超级管理员', 'e45738bf3eabe042f871fbd8c63cd37a', '51carry');
+INSERT INTO t_admin VALUES('1', 'admin', '超级管理员', 'e45738bf3eabe042f871fbd8c63cd37a', '51carry');
 CREATE TABLE t_area (
 	id INT COMMENT '大区ID',
 	isp VARCHAR(255) COMMENT '互联网服务提供商',
