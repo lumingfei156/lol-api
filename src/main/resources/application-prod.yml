@@ -1,0 +1,10 @@
+server:
+  port: 9090
+  context-path: /lol
+  tomcat: 
+    basedir: /tmp
+      
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: true

@@ -15,4 +15,5 @@ public class LolApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LolApiApplication.class, args);
 	}
+	
 }

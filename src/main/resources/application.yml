@@ -1,15 +1,11 @@
-server:
-  port: 8080
-  context-path: /lol
-
+spring: 
+  profiles:
+    active:
+    - dev
+    
 logging:
   level:
-    cn.howieli.lol: TRACE 
-
-spring:
-  thymeleaf:
-    mode: LEGACYHTML5
-    cache: false
+    cn.howieli.lol: TRACE
 
 #Druid连接池配置
 druid:

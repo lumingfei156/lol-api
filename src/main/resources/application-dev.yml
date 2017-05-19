@@ -1,0 +1,8 @@
+server:
+  port: 8080
+  context-path: /lol
+      
+spring: 
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
