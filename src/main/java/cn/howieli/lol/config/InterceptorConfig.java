@@ -38,7 +38,7 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController( "/" ).setViewName( "/index" );
+		registry.addViewController( "/" ).setViewName( "index" );
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE );
 		super.addViewControllers(registry);
 	}

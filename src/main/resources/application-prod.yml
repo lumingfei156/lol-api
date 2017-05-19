@@ -1,12 +1,11 @@
 server:
   port: 9090
-  context-path: /lol
+  use-forward-headers: true
   tomcat: 
     basedir: /tmp
     remote-ip-header: x-forwarded-for
     protocol-header: x-forwarded-proto
     port-header: X-Forwarded-Port
-  use-forward-headers: true
       
 spring:
   thymeleaf:
