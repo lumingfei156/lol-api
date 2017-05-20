@@ -31,7 +31,7 @@ public class ScheduledTasks {
 		}
 	}
 	
-	@Scheduled(cron = "0 5 0 * * ?")
+	@Scheduled(cron = "0 1 0 * * ?")
 	public void addTodayCount() {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		if (countService.selectToday() == null) {
