@@ -1,5 +1,9 @@
 package cn.howieli.lol.interceptor;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +21,9 @@ public class APICountInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		if (countService.selectToday() == null) {
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			countService.insertToday();
+			System.out.println("定时器还未执行，直接插入当天计数，成功-------->" + format.format(new Date()));
 		}
 		countService.updateToday();
 		return true;
