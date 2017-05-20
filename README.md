@@ -26,7 +26,7 @@
     mvn spring-boot:run
     ```
 
-5. 启动成功后，访问`http://localhost:8080/lol/admin`，默认账户：admin 密码：123456。
+5. 启动成功后，访问`http://localhost:8080/admin`，默认账户：admin 密码：123456。
 6. 登录成功后，点击三个更新按钮，分别更新英雄数据，装备数据，技能数据。
 
 ---
