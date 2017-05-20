@@ -2,16 +2,21 @@ package cn.howieli.lol;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import cn.howieli.lol.service.ICountService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LolApiApplicationTests {
-
+	@Autowired
+	private ICountService countService;
+	
 	@Test
 	public void contextLoads() {
-		
+		System.out.println(countService.selectToday());
 	}
 
 }
