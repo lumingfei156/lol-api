@@ -16,14 +16,14 @@ public class BattleSpider {
 	
 	/**
 	 * 获取战绩列表
-	 * @param areaId
-	 * @param qquin
-	 * @param btNum
-	 * @param btList
-	 * @param championId
-	 * @param offset
-	 * @param limit
-	 * @param mvpFlag
+	 * @param areaId 大区ID
+	 * @param qquin 玩家唯一标识
+	 * @param btNum 需要根据模式查询战绩的设置该值为1,否则为0。测试,该值设置为0,只要bt_list[]不为空，也能查询到相应模式的战绩
+	 * @param btList 
+	 * @param championId 查询指定英雄战局
+	 * @param offset 开始下标
+	 * @param limit 获取多少条战绩数据
+	 * @param mvpFlag -1 查询mvp和非mvp战局 1 查询mvp战局 0 查询非mvp战局
 	 * @return
 	 */
 	public static Map<String, Object> getBattleList(int areaId, String qquin, int btNum, Integer[] btList, int championId,
@@ -33,6 +33,11 @@ public class BattleSpider {
 						+ "\",\"bt_list\":" + array2String(btList) + ",\"champion_id\":" + championId + ",\"offset\":" + offset
 						+ ",\"limit\":" + limit + ",\"mvp_flag\":" + mvpFlag + "}]]";
 		String data = GetNetDataUtil.GetNetData("http://api.pallas.tgp.qq.com/core/get_player_battle_list", "p=" + p, true);
+		
+		while (data.contains("2002")) {
+			data = GetNetDataUtil.GetNetData("http://api.pallas.tgp.qq.com/core/get_player_battle_list", "p=" + p, true);
+		}
+		
 		JsonNode dataNode = ParseJsonUtil.getJsonNode(data).path("data");
 		JsonNode battleListNode = dataNode.findValue("battle_list");
 		
@@ -72,6 +77,11 @@ public class BattleSpider {
 	public static Battle getBattleInfo(int areaId, long gameId) throws Exception {
 		String p = "{\"area_id\":" + areaId + ",\"game_id\":" + gameId + "}";
 		String data = GetNetDataUtil.GetNetData("http://api.pallas.tgp.qq.com/core/get_battle_info", "p=" + p, true);
+		
+		while (data.contains("2002")) {
+			data = GetNetDataUtil.GetNetData("http://api.pallas.tgp.qq.com/core/get_battle_info", "p=" + p, true);
+		}
+		
 		JsonNode battleNode = ParseJsonUtil.getJsonNode(data).path("data").path("battle");
 		JsonNode gamersNode = battleNode.path("gamer_records");
 		JsonNode gamerNode;

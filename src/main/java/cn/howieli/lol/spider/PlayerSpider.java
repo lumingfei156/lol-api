@@ -19,6 +19,14 @@ public class PlayerSpider {
 	 */
 	public static List<Player> searchPlayerList(String playerName) throws Exception {
 		String jsonData = GetNetDataUtil.GetNetData("http://api.pallas.tgp.qq.com/core/search_player", "key=" + URLCodeUtil.getUTF8(playerName), true);
+		
+		/**
+		 * 有的时候Cookie会失效
+		 */
+		while(jsonData.contains("2002")) {
+			jsonData = GetNetDataUtil.GetNetData("http://api.pallas.tgp.qq.com/core/search_player", "key=" + URLCodeUtil.getUTF8(playerName), true);
+		}
+		
 		List<Player> players = new ArrayList<Player>();
 		Player player = null;
 		JsonNode rootNode = ParseJsonUtil.getJsonNode(jsonData);
@@ -46,6 +54,11 @@ public class PlayerSpider {
 	 */
 	public static List<Player> playerTierRanking(int areaId, int pageNum) throws Exception {
 		String jsonData = GetNetDataUtil.GetNetData("http://api.pallas.tgp.qq.com/core/get_score_rank", "area_id=" + areaId + "&pnum=" + pageNum, true);
+		
+		while(jsonData.contains("2002")) {
+			jsonData = GetNetDataUtil.GetNetData("http://api.pallas.tgp.qq.com/core/get_score_rank", "area_id=" + areaId + "&pnum=" + pageNum, true);
+		}
+		
 		List<Player> players = new ArrayList<Player>();
 		Player player = null;
 		int[] champions = null;
